@@ -38,6 +38,7 @@ const singleQuestion = async (questionId) => {
 const transformQuestion = (question) => {
   return {
     ...question._doc,
+    id: question.id,
     answers: answers.bind(this, question.answers),
   };
 };
@@ -45,6 +46,7 @@ const transformQuestion = (question) => {
 const transformResponseAnswer = (responseAnswer) => {
   return {
     ...responseAnswer._doc,
+    id: responseAnswer.id,
     date: dateToString(responseAnswer.date),
     question: singleQuestion.bind(this, responseAnswer.question),
     selected_answers: answers.bind(this, responseAnswer.selected_answers),
@@ -54,6 +56,7 @@ const transformResponseAnswer = (responseAnswer) => {
 const transformQuiz = (quiz) => {
   return {
     ...quiz._doc,
+    id: quiz.id,
     questions: questions.bind(this, quiz.questions),
   };
 };
@@ -61,6 +64,7 @@ const transformQuiz = (quiz) => {
 const transformResult = (result) => {
   return {
     ...result._doc,
+    id: result.id,
     date: dateToString(result.date),
   };
 };
@@ -68,6 +72,7 @@ const transformResult = (result) => {
 const transformUser = (user) => {
   return {
     ...user._doc,
+    id: user.id,
     created_at: dateToString(user.created_at),
   };
 };
@@ -75,6 +80,7 @@ const transformUser = (user) => {
 const transformUserContactLocation = (userContactLocation) => {
   return {
     ...userContactLocation._doc,
+    id: userContactLocation.id,
     date: dateToString(userContactLocation.date),
   };
 };

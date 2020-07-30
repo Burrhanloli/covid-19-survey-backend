@@ -2,7 +2,7 @@ const { buildSchema } = require("graphql");
 module.exports = buildSchema(`
 	input UserInput {
 		userName: String!
-		email: String!
+		mobile: String!
 		password: String!
 	}
 
@@ -39,7 +39,7 @@ module.exports = buildSchema(`
 	}
 
 	type User {
-		_id: ID!
+		id: ID!
 		user_name: String!
 		email: String!
 		password: String!
@@ -47,13 +47,13 @@ module.exports = buildSchema(`
 	}
 
 	type Quiz {
-		_id: ID!
+		id: ID!
 		text: String!
 		questions: [Question!]
 	}
 
 	type Question {
-		_id: ID!
+		id: ID!
 		text: String!
 		quiz_id: String
 		priority_order: Int!
@@ -62,22 +62,23 @@ module.exports = buildSchema(`
 	}
 
 	type Answer {
-		_id: ID!
+		id: ID!
 		text: String!
 		question_id: String
 		risk_factor: Int!
 	}
 
 	type ResponseAnswer {
-		_id: ID!
+		id: ID!
 		user_id: String!
 		quiz_id: String!
 		question: Question!
 		selected_answers: [Answer!]!
+		date: String!
 	}
 
 	type UserContactLocation {
-		_id: ID!
+		id: ID!
 		user_id: String!
 		mobile: String!
 		location: String!
@@ -85,7 +86,7 @@ module.exports = buildSchema(`
 	}
 
 	type Result {
-		_id: ID!
+		id: ID!
 		user_id: ID!
 		is_high_risk: Boolean!
 		date: String!
@@ -93,7 +94,8 @@ module.exports = buildSchema(`
 
 	type RootQuery {
 		me: User!
-		userLogin(email: String!, password: String!): AuthData!
+		getToken(mobile: String!): AuthData!
+		userLogin(mobile: String!, password: String!): AuthData!
 
 		getQuizById(quizId: ID!): Quiz!
 		getAllQuiz: [Quiz!]
